@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def index(x, t, eps=1.0E-14):
+def index(x, t, eps=np.spacing(1)):
     """
     Given an array t and a value x, return the index i such that
     t_i <= x < t_i+1. If x is equal to the last element of t, return the second to last index. If no
@@ -115,4 +115,4 @@ def knot_averages(t, p):
     :return: array
     """
 
-    return np.convolve(a=t[1:], v=np.ones(p + 1), mode='valid') / p
+    return np.convolve(a=t[1:-1], v=np.ones(p), mode='valid') / p
