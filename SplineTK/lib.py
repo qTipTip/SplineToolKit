@@ -60,11 +60,8 @@ def _evaluate_non_zero_b_splines(x, t, i, p):
 
     b = 1
     for k in range(1, p + 1):
-        # extract relevant knots
         t1 = t[i - k + 1: i + 1]
         t2 = t[i + 1: i + k + 1]
-        # append 0 to end of first term, and insert 0 to start of second term
-        # noinspection PyArgumentList
         omega = np.divide((x - t1), (t2 - t1), out=np.zeros_like(t1), where=((t2 - t1) != 0))
         b = np.append((1 - omega) * b, 0) + np.insert((omega * b), 0, 0)
 
@@ -118,4 +115,4 @@ def knot_averages(t, p):
     :return: array
     """
 
-    return np.convolve(a=t[1:], v=np.ones(p+1), mode='valid') / p
+    return np.convolve(a=t[1:], v=np.ones(p + 1), mode='valid') / p
