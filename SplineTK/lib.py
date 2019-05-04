@@ -68,16 +68,28 @@ def _evaluate_non_zero_b_splines(x, t, i, p):
     return b
 
 
-def _loop_array(t, p):
+def _loop_uniform_knots(t, p, dt):
+    """
+    Adds p values to the end of the array t using uniform spacing dt.
+    :param t: knot array
+    :param p: number of values to add
+    :param dt: spacing
+    :return: looped knots
+    """
+    t = np.concatenate((t, [t[-1] + (i + 1) * dt for i in range(p)]))
+    return t
+
+
+def _loop_coefficients(c, p):
     """
     Adds the p first values of t to the end of t.
-    :param t: array to loop
+    :param c: array to loop
     :param p: number of values to loop
     :return: looped array
     """
-    t = np.atleast_2d(t)
-    t = np.concatenate((t, t[:, :p]), axis=1)
-    return np.squeeze(t)
+    c = np.atleast_2d(c)
+    c = np.concatenate((c, c[:, :p]), axis=1)
+    return np.squeeze(c)
 
 
 def _evaluate_spline(x, t, c, p):
