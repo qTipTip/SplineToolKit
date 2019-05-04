@@ -63,6 +63,19 @@ def test_quadratic_parametric_spline():
                                    err_msg=f'computed values {computed_y} does not agree with expected values {expected_y}')
 
 
+def test_quadratic_spline_nonzero_at_endpoint():
+    t = (0, 0, 0, 1, 2, 3, 4, 5, 5, 5)
+    p = 2
+    c = (-1, 1, -1, 1, -1, 1, -1)
+
+    f = Spline(p, t, c)
+    x = np.linspace(0, 5, num=60)
+    y = f(x)
+
+    assert np.not_equal(y[-1],
+                        0), f'the spline is evaluated to be {y[-1]} at the endpoint, even though we expect {c[-1]}'
+
+
 @np.vectorize
 def exact_quadratic(x):
     if 0 <= x < 1:

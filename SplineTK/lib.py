@@ -14,7 +14,7 @@ def index(x, t, eps=np.spacing(1)):
 
     if x < t[0] or x > t[-1]:
         return -1
-    if abs(x - t[-1]) < eps:
+    if t[-1] - x < eps:
         for i in range(len(t) - 1, 0, -1):
             if t[i] < x:
                 return i
@@ -78,10 +78,9 @@ def _evaluate_spline(x, t, c, p):
     :param p: polynomial degree
     :return: f(x)
     """
-
+    i = index(x, t) + p + 1
     t = pad_knots(t, p).astype(np.float64)
     c = pad_and_reshape_coefficients(c, p)
-    i = index(x, t)
 
     if i == -1:
         return np.zeros((c.shape[0], 1))
