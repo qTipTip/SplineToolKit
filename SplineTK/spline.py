@@ -31,7 +31,7 @@ class Spline(object):
     @property
     def control_polygon(self):
         if self.c.shape[0] == 1:
-            return [knot_averages(self.t, self.p), self.c[0]]
+            return [np.atleast_2d(knot_averages(self.t, self.p)), self.c]
         else:
             return self.c
 
@@ -56,9 +56,9 @@ class ClosedSpline(Spline):
         if not np.all(dt == dt[0]):
             raise NonUniformKnotsError()
 
+        t = _loop_uniform_knots(t, p, dt[0])
+        c = _loop_coefficients(c, p)
         super().__init__(p, t, c)
-        self.t = _loop_uniform_knots(self.t, self.p, dt[0])
-        self.c = _loop_coefficients(self.c, self.p)
 
     @property
     def domain_of_definition(self):

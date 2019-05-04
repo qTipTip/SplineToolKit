@@ -3,10 +3,10 @@ import numpy as np
 
 from SplineTK.spline import ClosedSpline
 
-t = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+t = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 c = [
-    [0, 1, 1, 0, 2, 3],
-    [0, 0, 1, 1, 4, 1]
+    [0, 1, 1, 0, 2, 3, 2],
+    [0, 0, 1, 1, 4, 1, -1]
 ]
 p = 3
 f = ClosedSpline(p, t, c)
@@ -17,4 +17,5 @@ fig = plt.figure()
 axs = plt.gca()
 axs.plot(*y)
 axs.plot(*f.control_polygon, ls='dashed')
+axs.scatter(*f.control_polygon, zorder=100)
 plt.show()
