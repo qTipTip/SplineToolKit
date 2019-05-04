@@ -68,6 +68,18 @@ def _evaluate_non_zero_b_splines(x, t, i, p):
     return b
 
 
+def _loop_array(t, p):
+    """
+    Adds the p first values of t to the end of t.
+    :param t: array to loop
+    :param p: number of values to loop
+    :return: looped array
+    """
+    t = np.atleast_2d(t)
+    t = np.concatenate((t, t[:, :p]), axis=1)
+    return np.squeeze(t)
+
+
 def _evaluate_spline(x, t, c, p):
     """
     Evalutes the degree p spline given by the knot vector t, the coefficients c at the point x.
