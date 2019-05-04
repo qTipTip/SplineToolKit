@@ -35,6 +35,10 @@ class Spline(object):
         else:
             return self.c
 
+    @property
+    def domain_of_definition(self):
+        return [self.t[0], self.t[-1]]
+
 
 class NonUniformKnotsError(ValueError):
     pass
