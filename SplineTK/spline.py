@@ -58,4 +58,4 @@ class ClosedSpline(Spline):
 
     @property
     def domain_of_definition(self):
-        return [self.t[self.p], self.t[-self.p]]
+        return [self.t[self.p], self.t[-self.p - 1]]
