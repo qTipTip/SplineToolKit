@@ -9,7 +9,6 @@ def test_loop_knots():
     dt = 1
 
     computed_t = _loop_uniform_knots(t, p, dt)
-    print(computed_t)
     expected_t = (0, 1, 2, 3, 4, 5, 6)
 
     np.testing.assert_almost_equal(computed_t, expected_t)
