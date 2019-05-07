@@ -37,7 +37,7 @@ class Spline(object):
 
     @property
     def domain_of_definition(self):
-        return [self.t[0], self.t[-1]]
+        return [self.t[self.p], self.t[-(self.p + 1)]]
 
 
 class NonUniformKnotsError(ValueError):
