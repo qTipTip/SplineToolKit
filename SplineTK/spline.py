@@ -59,7 +59,3 @@ class ClosedSpline(Spline):
         t = _loop_uniform_knots(t, p, dt[0])
         c = _loop_coefficients(c, p)
         super().__init__(p, t, c)
-
-    @property
-    def domain_of_definition(self):
-        return [self.t[self.p], self.t[-self.p - 1]]
